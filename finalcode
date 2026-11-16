@@ -13,6 +13,6 @@ WITH ManagerReportCount AS (
 SELECT
     e.name
 FROM Employee AS e
-LEFT JOIN ManagerReportCount AS m
-    ON m.managerId = e.id
-WHERE m.totalDirectReports = 5;
+INNER JOIN ManagerReportCount AS m
+    ON e.id = m.managerId
+WHERE m.totalDirectReports >= 5;
