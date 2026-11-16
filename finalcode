@@ -1,0 +1,18 @@
+WITH ManagerReportCount AS (
+    SELECT
+        managerId,
+        COUNT(*) AS totalDirectReports
+    FROM Employee
+    WHERE managerId IN (
+        SELECT id
+        FROM Employee
+    )
+    GROUP BY managerId
+)
+
+SELECT
+    e.name
+FROM Employee AS e
+LEFT JOIN ManagerReportCount AS m
+    ON m.managerId = e.id
+WHERE m.totalDirectReports = 5;
